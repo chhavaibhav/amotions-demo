@@ -7,3 +7,4 @@ firebase-admin
 pinecone-client
 pypdf
 chromadb
+streamlit_chat
