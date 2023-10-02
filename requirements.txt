@@ -1,0 +1,9 @@
+langchain
+openai
+tiktoken
+qdrant-client
+streamlit
+firebase-admin
+pinecone-client
+pypdf
+chromadb
