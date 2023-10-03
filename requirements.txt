@@ -8,4 +8,4 @@ firebase-admin
 pinecone-client
 pypdf
 pysqlite3-binary
-chromadb
+chromadb==0.3.5
