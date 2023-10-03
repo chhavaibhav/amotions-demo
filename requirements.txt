@@ -7,5 +7,4 @@ qdrant-client
 firebase-admin
 pinecone-client
 pypdf
-pysqlite3
 chromadb
