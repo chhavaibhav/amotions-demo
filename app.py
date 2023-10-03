@@ -1,3 +1,6 @@
+import 'pysqlite3'
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
 from langchain.vectorstores import Chroma
