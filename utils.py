@@ -1,4 +1,7 @@
 # from sentence_transformers import SentenceTransformer
+import 'pysqlite3'
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import pinecone
 import openai
 import streamlit as st
