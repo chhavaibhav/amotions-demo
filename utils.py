@@ -7,22 +7,23 @@ import openai
 import streamlit as st
 from langchain.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 
 openai.api_key = st.secrets['OPENAI_API_KEY']
-embeddings = OpenAIEmbeddings(openai_api_key=st.secrets['OPENAI_API_KEY'])
+openai.organization = st.secrets['OPENAI_ORG']
+embeddings = OpenAIEmbeddings(openai_api_key=st.secrets['OPENAI_API_KEY'], openai_organization=st.secrets['OPENAI_ORG'])
 # model = SentenceTransformer('all-MiniLM-L6-v2')
 
-llm = OpenAI(temperature=0, openai_api_key=st.secrets['OPENAI_API_KEY'])
+llm = OpenAI(temperature=0, openai_api_key=st.secrets['OPENAI_API_KEY'], openai_organization=st.secrets['OPENAI_ORG'])
 chain = load_qa_chain(llm, chain_type="stuff")
 
 pinecone.init(api_key=st.secrets['PINECONE_API_KEY'], environment=st.secrets['PINECONE_API_ENV'])
 index = pinecone.Index('amotions-data-index')
 
-loader = PyPDFLoader("./data/WSP Manual No Redlines 5-5-2023.pdf")
+loader = PyPDFDirectoryLoader("./data")
 data = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=0)
 texts = text_splitter.split_documents(data)
